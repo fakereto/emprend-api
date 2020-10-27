@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        return User::find($id);
+        return new UserResource(User::find($id));
     }
 
     public function userComments(Request $request)
