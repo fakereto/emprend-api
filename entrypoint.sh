@@ -34,12 +34,7 @@ _is_sourced() {
 
 _main() {
     sed -i "s~ENV_SERVER_NAME~${ENV_SERVER_NAME}~g" ${NGINX_CONF_DIR}/sites-enabled/app.conf
-    #Run base phpfpm image entrypoint
-    if [[ ! -f ./vendor ]]; then
-        composer install --prefer-dist --no-scripts --optimize-autoloader
-    else
-        composer update
-    fi
+    sleep 10s
     #php artisan migrate
     php artisan migrate
     php artisan db:seed

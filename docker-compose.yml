@@ -6,10 +6,10 @@ services:
     - "8000:80"
     volumes:
     - ./src/:/var/www/app/
-    links:
-    - db
     depends_on:
     - db
+    environment: 
+      DB_PASSWORD: secur3Passw0rd
   db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
