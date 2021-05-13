@@ -33,6 +33,9 @@ _is_sourced() {
 }
 
 _main() {
+    #Run base phpfpm image entrypoint
+    /var/www/docker-phpfpm-entrypoint.sh
+    
     sed -i "s~ENV_SERVER_NAME~${ENV_SERVER_NAME}~g" ${NGINX_CONF_DIR}/sites-enabled/app.conf
     sleep 10s
     #php artisan migrate

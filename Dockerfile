@@ -1,4 +1,4 @@
-FROM fakereto/nginx-fpm
+FROM fakereto/nginx-fpm:latest
 # add bitbucket and github to known hosts for ssh needs
 WORKDIR /root/.ssh
 
