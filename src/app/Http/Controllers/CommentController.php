@@ -15,7 +15,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        return new CommentCollection(Comment::orderBy('created_at', 'desc')->paginate(10));
+        return Comment::with("user")->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function show($id)
