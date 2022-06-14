@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Comment;
 use App\Http\Resources\Comment as CommentResource;
@@ -20,7 +20,7 @@ class CommentController extends Controller
 
     public function show($id)
     {
-        return Comment::find($id);
+        return new CommentResource(Comment::find($id));
     }
 
     public function store(Request $request)
