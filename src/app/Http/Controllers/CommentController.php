@@ -25,13 +25,17 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        return Auth::user()->comments()->save(new Comment($request->all()));
+        $this->validator($request->all())->validate();
+        return new CommentResource(Auth::user()->comments()->save(new Comment($request->all())));
     }
 
     public function update(Request $request, $id)
     {
+
+        $this->validator($request->all())->validate();
+
         try {
-            $article = Comment::findOrFail($id);
+            $article = new CommentResource(Comment::findOrFail($id));
             $article->update($request->all());
             return $article;
         } catch (\Throwable $th) {
@@ -55,5 +59,18 @@ class CommentController extends Controller
         return response()->json([
             ''
         ], 200);
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'body' => ['required'],
+        ]);
     }
 }
